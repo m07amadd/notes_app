@@ -15,7 +15,7 @@ class AddNoteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddNotesCubit(),
-      child: BlocConsumer<AddNotesCubit, NotesState>(
+      child: BlocConsumer<AddNotesCubit, AddNotesState>(
         listener: (context, state) {
           if (state is AddNotesFailure) {
             print('feiled: ${state.errMessage}');
