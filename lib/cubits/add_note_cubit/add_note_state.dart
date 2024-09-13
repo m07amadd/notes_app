@@ -5,12 +5,12 @@ abstract class NotesState {}
 
 class NotesInitial extends NotesState {}
 
-class NotesLoading extends NotesState {}
+class AddNotesLoading extends NotesState {}
 
-class NotesSuccess extends NotesState {}
+class AddNotesSuccess extends NotesState {}
 
-class NotesFailure extends NotesState {
+class AddNotesFailure extends NotesState {
   final String errMessage;
 
-  NotesFailure({required this.errMessage});
+  AddNotesFailure({required this.errMessage});
 }

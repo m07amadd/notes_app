@@ -14,20 +14,20 @@ class AddNoteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NotesCubit(),
-      child: BlocConsumer<NotesCubit, NotesState>(
+      create: (context) => AddNotesCubit(),
+      child: BlocConsumer<AddNotesCubit, NotesState>(
         listener: (context, state) {
-          if (state is NotesFailure) {
+          if (state is AddNotesFailure) {
             print('feiled: ${state.errMessage}');
           }
 
-          if (state is NotesSuccess) {
+          if (state is AddNotesSuccess) {
             Navigator.pop(context);
           }
         },
         builder: (context, state) {
           return AbsorbPointer(
-            absorbing: state is NotesLoading ? true : false,
+            absorbing: state is AddNotesLoading ? true : false,
             child: Padding(
               padding: EdgeInsets.only(
                   right: 16,
