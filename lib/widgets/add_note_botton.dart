@@ -15,24 +15,25 @@ class AddNoteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NotesCubit(),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: BlocConsumer<NotesCubit, NotesState>(
-          listener: (context, state) {
-            if (state is NotesFailure) {
-              print('feiled: ${state.errMessage}');
-            }
+      child: BlocConsumer<NotesCubit, NotesState>(
+        listener: (context, state) {
+          if (state is NotesFailure) {
+            print('feiled: ${state.errMessage}');
+          }
 
-            if (state is NotesSuccess) {
-              Navigator.pop(context);
-            }
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
-                inAsyncCall: state is NotesLoading ? true : false,
-                child: SingleChildScrollView(child: AddNoteForm()));
-          },
-        ),
+          if (state is NotesSuccess) {
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          return AbsorbPointer(
+            absorbing: state is NotesLoading ? true : false,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: SingleChildScrollView(child: AddNoteForm()),
+            ),
+          );
+        },
       ),
     );
   }
